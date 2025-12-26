@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ recipe.name }} - 做菜步骤</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+        .back { margin-bottom: 1rem; }
+        .back a { text-decoration: none; color: #4285F4; }
+        .back a:hover { text-decoration: underline; }
+        h1 { text-align: center; margin-bottom: 2rem; color: #333; }
+        .steps { line-height: 2; font-size: 1.1rem; }
+        .steps li { margin-bottom: 1rem; list-style-position: inside; }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <a href="{{ url_for('index') }}">← 返回菜品列表</a>
+    </div>
+
+    <h1>{{ recipe.name }} 做法步骤</h1>
+
+    <ul class="steps">
+        {% for step in steps %}
+            <li>{{ step }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

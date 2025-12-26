@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>家常菜谱大全 - 按首字母排序</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+        h1 { text-align: center; margin-bottom: 2rem; color: #333; }
+        .initial-nav { text-align: center; margin-bottom: 2rem; }
+        .initial-nav a { display: inline-block; padding: 0.5rem 1rem; margin: 0 0.2rem; text-decoration: none; color: #4285F4; border: 1px solid #ddd; border-radius: 4px; }
+        .initial-nav a:hover { background: #4285F4; color: white; border-color: #4285F4; }
+        .recipe-section { margin: 2rem 0; }
+        .recipe-section h2 { margin-bottom: 1rem; color: #555; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+        .recipe-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .recipe-item { padding: 1rem; border: 1px solid #ddd; border-radius: 8px; text-align: center; transition: transform 0.2s; }
+        .recipe-item:hover { transform: translateY(-5px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .recipe-item a { text-decoration: none; color: #333; font-size: 1rem; }
+        .recipe-item a:hover { color: #4285F4; }
+    </style>
+</head>
+<body>
+    <h1>家常菜谱大全（120道）</h1>
+    
+    <!-- 首字母导航栏 -->
+    <div class="initial-nav">
+        {% for initial in initials %}
+            <a href="#{{ initial }}">{{ initial }}</a>
+        {% endfor %}
+    </div>
+
+    <!-- 按首字母分组展示菜品 -->
+    {% for initial in initials %}
+        <div class="recipe-section" id="{{ initial }}">
+            <h2>首字母 {{ initial }}</h2>
+            <div class="recipe-list">
+                {% for recipe in recipe_groups[initial] %}
+                    <div class="recipe-item">
+                        <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}">{{ recipe.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
